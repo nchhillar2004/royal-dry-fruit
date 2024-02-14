@@ -4,7 +4,7 @@ const SiteConfig = {
     title: "Royal dry fruit point",
     shortTitle: "RDF",
     description:
-        "",
+        "Find the best dry fruits at Royal Dry Fruit Point in Kharkhoda, Jhajjar, Haryana, India. Enjoy premium quality at unbeatable prices, making your snacking experience truly delightful.",
     url: isProduction
         ? "https://app.nishantchhillar.tech"
         : "http://localhost:3000",

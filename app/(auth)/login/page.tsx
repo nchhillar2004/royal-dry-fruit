@@ -3,12 +3,30 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import SiteConfig from "@/config/site";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 export default function LoginPage() {
+    const router = useRouter();
+
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         const email = e.target[0].value;
         const password = e.target[1].value;
+        try {
+            const res = await signIn("credentials", {
+                redirect: false,
+                email,
+                password,
+            });
+            if (res?.status === 401) {
+            }
+            if (res?.error) {
+                if (res?.url) router.replace("/");
+            } else {
+                console.log(res?.error);
+            }
+        } catch (error) {}
     };
     return (
         <div>
@@ -28,8 +46,8 @@ export default function LoginPage() {
                     </Link>
                 </div>
                 <div className="form">
-                    <div className="auth-card bg-white border border-zinc-200 rounded-md w-[350px] py-5 px-7 m-auto">
-                        <h1 className="font-normal text-[28px] leading-[1.2rem] mb-3">
+                    <div className="auth-card bg-white border border-zinc-200 rounded-md max-md:w-[280px] w-[350px] lg:w-[380px] py-5 px-7 m-auto">
+                        <h1 className="font-normal text-[28px] leading-[1.2rem] mb-4">
                             Login
                         </h1>
                         <form

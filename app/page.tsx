@@ -13,16 +13,31 @@ export default async function Home() {
                     <div className="intro text-red-50 max-md:w-full w-2/5 max-md:text-center">
                         <h1>{SiteConfig.title}</h1>
                         <p className="h-fit mb-4">{SiteConfig.description}</p>
-                        <Link href='/' className="bg-red-100 text-red-800 py-4 px-6">Explore </Link>
+                        <Link
+                            href="/products"
+                            className="bg-red-100 text-red-800 py-4 px-6"
+                        >
+                            Explore{" "}
+                        </Link>
                     </div>
                     <div className="banner max-md:w-full w-2/5 flex items-center justify-center">
-                        <Image src='/photo.jpg' width={250} height={250} alt="Dry fruits" />
+                        <Image
+                            src="/photo.jpg"
+                            width={250}
+                            height={250}
+                            alt="Dry fruits"
+                        />
                     </div>
                 </div>
             </div>
             <main className="h-full py-6 space-y-4">
                 <div className="card">
-                    <h1>Products</h1>
+                    <div className="flex items-center justify-between">
+                        <h1>Products</h1>
+                        <Link href="/products" className="link">
+                            All products
+                        </Link>
+                    </div>
                 </div>
                 <div className="card">
                     <h1>Products</h1>
@@ -37,7 +52,7 @@ export default async function Home() {
                     <h1>Contact</h1>
                 </div>
             </main>
-            <Footer/>
+            <Footer />
         </div>
     );
 }

@@ -4,13 +4,38 @@ import { time } from "@/utils/getTime";
 import Image from "next/image";
 import Link from "next/link";
 import SiteConfig from "@/config/site";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
+    const router = useRouter();
+
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         const name = e.target[0].value;
         const email = e.target[1].value;
         const password = e.target[2].value;
+        const image = "";
+        try {
+            const res = await fetch("/api/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    time,
+                    image,
+                    password,
+                }),
+            });
+            if (res.status === 400) {
+                console.log("user exists");
+            }
+            if (res.status === 200) {
+                router.push("/login");
+            }
+        } catch (error) {}
     };
 
     return (
@@ -31,8 +56,8 @@ export default function RegisterPage() {
                     </Link>
                 </div>
                 <div className="form">
-                    <div className="auth-card bg-white border border-zinc-200 rounded-md w-[350px] py-5 px-7 m-auto">
-                        <h1 className="font-normal text-[28px] leading-[1.2rem] mb-3">
+                    <div className="auth-card bg-white border border-zinc-200 rounded-md max-md:w-[280px] w-[350px] lg:w-[380px] py-5 px-7 m-auto">
+                        <h1 className="font-normal text-[28px] leading-[1.2rem] mb-4">
                             Create account
                         </h1>
                         <form

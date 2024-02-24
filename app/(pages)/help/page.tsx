@@ -40,7 +40,7 @@ export default function page() {
                     </Link>
                 </div>
 
-                <div className="right text-[18px] w-full lg:ml-8 mt-4">
+                <div className="right lg:text-[18px] w-full lg:ml-8 mt-4">
                     <div id="create-account">
                         <TypographyH2 title="Creating new account" />
                         <TypographyP

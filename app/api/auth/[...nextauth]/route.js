@@ -2,31 +2,31 @@ import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import prisma from "@/prisma/index";
+import { connectDB } from "@/helpers/conn";
 
 export const dynamic = "force-dynamic";
 
 const authOptions = {
     pages: {
-        signIn: "/auth/login",
+        signIn: "/login",
     },
     providers: [
         CredentialsProvider({
             id: "credentials",
             name: "Credentials",
             credentials: {
-                username: {
-                    label: "Username",
-                    type: "text",
-                    placeholder: "test",
+                email: {
+                    label: "Email",
+                    type: "email",
+                    placeholder: "test@gmail.com",
                 },
                 password: { label: "Password", type: "password" },
             },
             async authorize(credentials) {
-                await prisma.$connect();
-
+                await connectDB();
                 const user = await prisma.users.findUnique({
                     where: {
-                        username: credentials.username,
+                        email: credentials.email,
                     },
                 });
 

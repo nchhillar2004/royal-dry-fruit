@@ -15,6 +15,7 @@ const SiteConfig = {
         instagram: "https://instagram.com/",
         facebook: "https://facebook.com/",
     },
+    location: "https://maps.app.goo.gl/jN5XkFMBb3mTBtfF8",
 };
 
 export default SiteConfig;

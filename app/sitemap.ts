@@ -16,13 +16,37 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.8,
         },
         {
-            url: `${SiteConfig.url}/signup`,
+            url: `${SiteConfig.url}/register`,
             lastModified: new Date(),
             changeFrequency: "daily",
             priority: 0.8,
         },
         {
             url: `${SiteConfig.url}/about`,
+            lastModified: new Date(),
+            changeFrequency: "monthly",
+            priority: 0.5,
+        },
+        {
+            url: `${SiteConfig.url}/help`,
+            lastModified: new Date(),
+            changeFrequency: "monthly",
+            priority: 0.5,
+        },
+        {
+            url: `${SiteConfig.url}/contact`,
+            lastModified: new Date(),
+            changeFrequency: "monthly",
+            priority: 0.5,
+        },
+        {
+            url: `${SiteConfig.url}/products`,
+            lastModified: new Date(),
+            changeFrequency: "monthly",
+            priority: 0.5,
+        },
+        {
+            url: `${SiteConfig.url}/terms`,
             lastModified: new Date(),
             changeFrequency: "monthly",
             priority: 0.5,

@@ -13,21 +13,21 @@ export default function Footer() {
             </Link>
 
             <div className="footer-nav">
-                <div className="flex w-[96%] justify-between py-10 items-start text-red-50 m-auto flex-wrap">
+                <div className="flex w-[96%] justify-between py-10 max-md:justify-around items-start text-red-50 m-auto flex-wrap">
                     <nav className="max-md:hidden">
                         <h4>Get to know us</h4>
                         <ul>
                             <li>
-                                <Link href="/">About us</Link>
+                                <Link href="/about">About us</Link>
                             </li>
                             <li>
-                                <Link href="/">Owner</Link>
+                                <Link href="/about#owner">Owner</Link>
                             </li>
                             <li>
-                                <Link href="/">Manager</Link>
+                                <Link href="/about#manager">Manager</Link>
                             </li>
                             <li>
-                                <Link href="/">Developer</Link>
+                                <Link href={SiteConfig.links.github}>Developer</Link>
                             </li>
                         </ul>
                     </nav>
@@ -36,19 +36,16 @@ export default function Footer() {
                         <h4>Important links</h4>
                         <ul>
                             <li>
-                                <Link href="/">Products</Link>
+                                <Link href="/products">Products</Link>
                             </li>
                             <li>
-                                <Link href="/">Services</Link>
+                                <Link href="/help#mails">Mail us</Link>
                             </li>
                             <li>
-                                <Link href="/">Terms</Link>
+                                <Link href="/terms">Terms</Link>
                             </li>
                             <li>
-                                <Link href="/">Privacy</Link>
-                            </li>
-                            <li>
-                                <Link href="/">Locate us</Link>
+                                <Link href={SiteConfig.location} target="_blank">Locate us</Link>
                             </li>
                         </ul>
                     </nav>
@@ -57,13 +54,13 @@ export default function Footer() {
                         <h4>Help & contact</h4>
                         <ul>
                             <li>
-                                <Link href="/">Contact us</Link>
+                                <Link href="/contact">Contact us</Link>
                             </li>
                             <li>
-                                <Link href="/">Help & support</Link>
+                                <Link href="/help">Help & support</Link>
                             </li>
                             <li>
-                                <Link href="/">Report</Link>
+                                <Link href="/contact">Report</Link>
                             </li>
                         </ul>
                     </nav>
@@ -75,10 +72,10 @@ export default function Footer() {
                                 <Link href="/">Youtube</Link>
                             </li>
                             <li>
-                                <Link href="/">Instagram</Link>
+                                <Link href={SiteConfig.links.instagram}>Instagram</Link>
                             </li>
                             <li>
-                                <Link href="/">Facebook</Link>
+                                <Link href={SiteConfig.links.facebook}>Facebook</Link>
                             </li>
                             <li>
                                 <Link href="/">Twitter</Link>

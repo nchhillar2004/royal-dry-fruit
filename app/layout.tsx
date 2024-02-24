@@ -2,7 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import SiteConfig from "@/config/site";
-import 'animate.css';
+import "animate.css";
+import AuthProvider from "@/utils/SessionProvider";
+import { getServerSession } from "next-auth";
 
 const font = Roboto({
     weight: ["100", "300", "400", "500", "700", "900"],
@@ -21,7 +23,7 @@ export const metadata: Metadata = {
         "Royal dry fruits",
         "Dry fruit shop",
         "Bahadurgarh",
-        "Jhajjar dry fruits"
+        "Jhajjar dry fruits",
     ],
     authors: [
         {
@@ -54,14 +56,25 @@ export const metadata: Metadata = {
     manifest: `${SiteConfig.url}/site.webmanifest`,
 };
 
-export default function RootLayout({
+export const viewport: Viewport = {
+    themeColor: [
+        { media: "(prefers-color-scheme: light)", color: "white" },
+        { media: "(prefers-color-scheme: dark)", color: "black" },
+    ],
+};
+
+export default async function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const session = await getServerSession();
+
     return (
         <html lang="en">
-            <body className={font.className}>{children}</body>
+            <body className={font.className}>
+                <AuthProvider session={session}>{children}</AuthProvider>
+            </body>
         </html>
     );
 }

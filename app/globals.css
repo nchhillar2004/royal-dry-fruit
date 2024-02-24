@@ -5,7 +5,6 @@
 html,
 body,
 :root {
-    font-size: 14px;
     --tw-bg-opacity: 1;
     background-color: rgb(254 242 242 / var(--tw-bg-opacity));
 }
@@ -38,7 +37,7 @@ h1 {
 }
 
 header {
-    box-shadow: 0 2px 4px -1px rgba(96, 57, 57, 0.15);
+    box-shadow: 0 2px 4px -1px rgba(53, 0, 0, 0.15);
 }
 
 .nav-buttons{
@@ -55,5 +54,29 @@ nav > h4{
 }
 
 li > a:hover{
+    text-decoration: underline;
+}
+
+.auth input{
+    width: 100%;
+    padding: 4px 8px;
+    border: 1px solid rgb(182, 180, 180);
+    border-radius: 4px;
+    outline: none;
+}
+
+.auth label{
+    line-height: normal;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.link{
+    color: #2563EB;
+    text-decoration: none;
+}
+
+.link:hover{
+    color: #DC2626;
     text-decoration: underline;
 }

@@ -1,10 +1,10 @@
-import Header from "@/components/header/page";
+import Header from "@/components/header/Header";
 import SiteConfig from "@/config/site";
-import Footer from "@/components/footer/page";
+import Footer from "@/components/footer/Footer";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
     return (
         <div className="__next w-full h-full">
             <Header />
@@ -16,7 +16,7 @@ export default function Home() {
                         <Link href='/' className="bg-red-100 text-red-800 py-4 px-6">Explore </Link>
                     </div>
                     <div className="banner max-md:w-full w-2/5 flex items-center justify-center">
-                        <Image src='/image.jpg' width={250} height={250} alt="Dry fruits" />
+                        <Image src='/photo.jpg' width={250} height={250} alt="Dry fruits" />
                     </div>
                 </div>
             </div>

@@ -1,0 +1,74 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGODB_URI")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Mails {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  title          String
+  body           String
+  type           MailType @default(Contact)
+  isGranted      Boolean  @default(false)
+  authorUsername String?
+  author         Users?   @relation(fields: [authorId], references: [id])
+  authorId       String?  @db.ObjectId
+  createdAt      DateTime @default(now())
+  time           String
+}
+
+model Products {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  title          String
+  body           String
+  authorUsername String?
+  author         Users?   @relation(fields: [authorId], references: [id])
+  authorId       String?  @db.ObjectId
+  createdAt      DateTime @default(now())
+  time           String
+  likes          Int?
+}
+
+model Users {
+  id         String     @id @default(auto()) @map("_id") @db.ObjectId
+  name       String?
+  email      String     @unique
+  password   String?
+  role       Role       @default(USER)
+  plan       Plan       @default(FREE)
+  isAdmin    Boolean    @default(false)
+  isVerified Boolean    @default(false)
+  isBan      Boolean    @default(false)
+  image      String
+  address    Address?
+  product    Products[]
+  mail       Mails[]
+  time       String
+  createdAt  DateTime   @default(now())
+}
+
+type Address {
+  street String
+  city   String
+  state  String
+  zip    String
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Plan {
+  FREE
+  PRO
+}
+
+enum MailType {
+  Contact
+  Report
+  Help
+}

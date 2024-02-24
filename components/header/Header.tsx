@@ -1,12 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import SiteConfig from "@/config/site";
 
 export default function Header() {
     return (
-        <header className="fixed z-10 top-0 w-full animate__animated animate__fadeInDown bg-red-900" id="top">
+        <header
+            className="fixed z-10 top-0 w-full animate__animated animate__fadeInDown bg-red-900"
+            id="top"
+        >
             <div className="flex justify-between py-4 text-red-50 items-center w-[96%] lg:w-[96%] m-auto">
                 <div className="left flex w-fit cursor-pointer space-x-2">
+                    <div className="lg:hidden">{/* <MenuSidebar/> */}</div>
                     <Image
                         src="/logo.png"
                         height={36}
@@ -21,35 +26,42 @@ export default function Header() {
                         </p>
                     </div>
                 </div>
-                <div className="center max-md:hidden space-x-1">
+                <div className="center max-lg:hidden space-x-1">
                     <Link
-                        href="#contact-form"
+                        href="/about"
                         className="nav-buttons hover:bg-red-800"
                     >
                         About us
                     </Link>
                     <Link
-                        href="#contact-form"
+                        href="/products"
                         className="nav-buttons hover:bg-red-800"
                     >
                         Products
                     </Link>
                     <Link
-                        href="#contact-form"
+                        href={SiteConfig.location}
                         className="nav-buttons hover:bg-red-800"
+                        target="_blank"
                     >
                         Locate us
                     </Link>
                     <Link
-                        href="#contact-form"
+                        href="/contact"
                         className="nav-buttons hover:bg-red-800"
                     >
                         Contact
                     </Link>
+                    <Link
+                        href="/help"
+                        className="nav-buttons hover:bg-red-800"
+                    >
+                        Help
+                    </Link>
                 </div>
                 <div className="right">
                     <Link
-                        href="#contact-form"
+                        href="/login"
                         className="nav-buttons hover:bg-red-800"
                     >
                         Login

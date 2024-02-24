@@ -57,7 +57,7 @@ export default function LoginPage() {
                             </button>
                             <p className="text-[14px]">
                                 By continuing, you agree to{" "}
-                                {SiteConfig.shortTitle}'s
+                                {SiteConfig.shortTitle}&apos;s
                                 <Link href="/terms" className="ml-1 link">
                                     Terms and Conditions
                                 </Link>

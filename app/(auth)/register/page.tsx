@@ -71,7 +71,7 @@ export default function RegisterPage() {
                             </button>
                             <p className="text-[14px]">
                                 By creating an account, you agree to{" "}
-                                {SiteConfig.shortTitle}'s 
+                                {SiteConfig.shortTitle}&apos;s 
                                 <Link href="/terms" className="ml-1 link">
                                     Terms and Conditions
                                 </Link>

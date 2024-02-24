@@ -1,9 +1,16 @@
+"use client"
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import SiteConfig from "@/config/site";
+import { signOut, useSession } from "next-auth/react";
 
 export default function Header() {
+    const { data: session, status: sessionStatus } = useSession();
+    var isLoading = false;
+    if (sessionStatus === "loading"){
+        isLoading = true;
+    }
     return (
         <header
             className="fixed z-10 top-0 w-full animate__animated animate__fadeInDown bg-red-900"
@@ -52,20 +59,30 @@ export default function Header() {
                     >
                         Contact
                     </Link>
-                    <Link
-                        href="/help"
-                        className="nav-buttons hover:bg-red-800"
-                    >
+                    <Link href="/help" className="nav-buttons hover:bg-red-800">
                         Help
                     </Link>
                 </div>
                 <div className="right">
-                    <Link
-                        href="/login"
-                        className="nav-buttons hover:bg-red-800"
-                    >
-                        Login
-                    </Link>
+                    {isLoading ? (
+                        <div className="flex">loading...</div>
+                    ) : (
+                        <div className="flex">
+                    {session ? (
+                        <div className="profile space-x-2 flex">
+                            <p>{session.user?.email}</p>
+                            <button onClick={() => {
+                                signOut()
+                            }}>Logout</button>
+                        </div>
+                    ) : (
+                        <Link
+                            href="/login"
+                            className="nav-buttons hover:bg-red-800"
+                        >
+                            Login
+                        </Link>
+                    )}</div>)}
                 </div>
             </div>
         </header>

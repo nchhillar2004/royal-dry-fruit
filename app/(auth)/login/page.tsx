@@ -20,8 +20,10 @@ export default function LoginPage() {
                 password,
             });
             if (res?.status === 401) {
+                console.log("user not found");
+                
             }
-            if (res?.error) {
+            if (!res?.error) {
                 if (res?.url) router.replace("/");
             } else {
                 console.log(res?.error);

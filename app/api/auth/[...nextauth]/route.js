@@ -29,7 +29,6 @@ const authOptions = {
                         email: credentials.email,
                     },
                 });
-
                 if (!user) {
                     throw new Error("User not found");
                 }

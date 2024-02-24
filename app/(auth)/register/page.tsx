@@ -14,7 +14,7 @@ export default function RegisterPage() {
         const name = e.target[0].value;
         const email = e.target[1].value;
         const password = e.target[2].value;
-        const image = "";
+        const image = "https://github.com/nchhillar2004/royal-dry-fruit/blob/master/public/images.png?raw=true";
         try {
             const res = await fetch("/api/register", {
                 method: "POST",

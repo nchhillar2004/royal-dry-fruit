@@ -41,24 +41,24 @@ header {
     box-shadow: 0 2px 4px -1px rgba(53, 0, 0, 0.15);
 }
 
-.nav-buttons{
+.nav-buttons {
     padding: 12px 20px;
 }
 
-.nav-buttons:hover{
+.nav-buttons:hover {
     border-radius: 24px;
 }
 
-nav > h4{
+nav > h4 {
     font-size: 16px;
     font-weight: 600;
 }
 
-li > a:hover{
+li > a:hover {
     text-decoration: underline;
 }
 
-.auth input{
+.auth input {
     width: 100%;
     padding: 4px 8px;
     border: 1px solid rgb(182, 180, 180);
@@ -66,18 +66,35 @@ li > a:hover{
     outline: none;
 }
 
-.auth label{
+.auth label {
     line-height: normal;
     font-size: 14px;
     font-weight: 600;
 }
 
-.link{
-    color: #2563EB;
+.link {
+    color: #2563eb;
     text-decoration: none;
 }
 
-.link:hover{
-    color: #DC2626;
+.link:hover {
+    color: #dc2626;
     text-decoration: underline;
+}
+
+.inputfld input,
+textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    background-color: var(--accent);
+    border-width: 1px;
+    border-radius: 0.375rem;
+    outline: none;
+}
+
+.inputfld input:focus,
+textarea:focus, .auth input:focus {
+    border-color: #f00;
+    box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.2);
 }

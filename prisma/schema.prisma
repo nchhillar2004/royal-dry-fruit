@@ -11,9 +11,9 @@ model Mails {
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
   title          String
   body           String
-  type           MailType @default(Contact)
+  type           String
   isGranted      Boolean  @default(false)
-  authorUsername String?
+  authorEmail String?
   author         Users?   @relation(fields: [authorId], references: [id])
   authorId       String?  @db.ObjectId
   createdAt      DateTime @default(now())
@@ -24,7 +24,7 @@ model Products {
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
   title          String
   body           String
-  authorUsername String?
+  authorEmail String?
   author         Users?   @relation(fields: [authorId], references: [id])
   authorId       String?  @db.ObjectId
   createdAt      DateTime @default(now())
@@ -45,7 +45,7 @@ model Users {
   image      String
   address    Address?
   product    Products[]
-  mail       Mails[]
+  mails       Mails[]
   time       String
   createdAt  DateTime   @default(now())
 }
@@ -65,10 +65,4 @@ enum Role {
 enum Plan {
   FREE
   PRO
-}
-
-enum MailType {
-  Contact
-  Report
-  Help
 }

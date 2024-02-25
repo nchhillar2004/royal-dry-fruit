@@ -32,7 +32,7 @@ h1 {
     background-color: white;
     border-radius: 6px;
     padding: 12px;
-    width: 96%;
+    /* width: 96%; */
     margin: auto;
     min-height: 200px;
 }

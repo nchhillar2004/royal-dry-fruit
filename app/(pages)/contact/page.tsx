@@ -52,7 +52,7 @@ export default function ContactForm() {
         <>
             {session ? (
                 <div className="">
-                  <h1 className='lg:text-4xl text-3xl my-4 w-[96%] m-auto'>Contact form</h1>
+                  <h1 className='lg:text-4xl text-3xl my-4'>Contact form</h1>
                     <div className="card w-full">
                         <form onSubmit={handlePost} className="inputfld">
                             <label htmlFor="title">Mail title</label>

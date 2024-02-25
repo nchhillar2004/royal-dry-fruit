@@ -30,7 +30,7 @@ export default async function Home() {
                     </div>
                 </div>
             </div>
-            <main className="h-full py-6 space-y-4">
+            <main className="h-full py-6 space-y-4 w-[96%] m-auto">
                 <div className="card">
                     <div className="flex items-center justify-between">
                         <h1>Products</h1>

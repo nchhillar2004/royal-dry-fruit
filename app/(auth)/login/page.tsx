@@ -5,6 +5,7 @@ import Image from "next/image";
 import SiteConfig from "@/config/site";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import toast from "react-hot-toast";
 
 export default function LoginPage() {
     const router = useRouter();
@@ -20,10 +21,10 @@ export default function LoginPage() {
                 password,
             });
             if (res?.status === 401) {
-                console.log("user not found");
-                
+                toast.error("User not found");
             }
             if (!res?.error) {
+                toast.success("Logged in");
                 if (res?.url) router.replace("/");
             } else {
                 console.log(res?.error);
@@ -58,7 +59,7 @@ export default function LoginPage() {
                         >
                             <div className="auth">
                                 <label htmlFor="email">Email address</label>
-                                <input type="email" name="email" id="email" />
+                                <input type="email" name="email" id="email" required />
                             </div>
                             <div className="auth">
                                 <label htmlFor="password">Enter password</label>
@@ -67,6 +68,7 @@ export default function LoginPage() {
                                     name="password"
                                     id="password"
                                     placeholder="Password"
+                                    required
                                 />
                             </div>
                             <button

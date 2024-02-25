@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import SiteConfig from "@/config/site";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function RegisterPage() {
     const router = useRouter();
@@ -15,6 +16,7 @@ export default function RegisterPage() {
         const email = e.target[1].value;
         const password = e.target[2].value;
         const image = "https://github.com/nchhillar2004/royal-dry-fruit/blob/master/public/images.png?raw=true";
+        
         try {
             const res = await fetch("/api/register", {
                 method: "POST",
@@ -30,9 +32,10 @@ export default function RegisterPage() {
                 }),
             });
             if (res.status === 400) {
-                console.log("user exists");
+                toast.error("User not found");
             }
             if (res.status === 200) {
+                toast.success("Registered successfull");
                 router.push("/login");
             }
         } catch (error) {}
@@ -71,11 +74,14 @@ export default function RegisterPage() {
                                     placeholder="Full name"
                                     name="name"
                                     id="name"
+                                    required
                                 />
+                                <div className="message"></div>
                             </div>
                             <div className="auth">
                                 <label htmlFor="email">Email address</label>
-                                <input type="email" name="email" id="email" />
+                                <input type="email" name="email" id="email" required />
+                                <div className="message"></div>
                             </div>
                             <div className="auth">
                                 <label htmlFor="password">
@@ -86,7 +92,9 @@ export default function RegisterPage() {
                                     name="password"
                                     id="password"
                                     placeholder="Atleast 6 characters"
+                                    required
                                 />
+                                <div className="message"></div>
                             </div>
                             <button
                                 type="submit"

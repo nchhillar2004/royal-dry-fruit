@@ -5,6 +5,7 @@ import SiteConfig from "@/config/site";
 import "animate.css";
 import AuthProvider from "@/utils/SessionProvider";
 import { getServerSession } from "next-auth";
+import { Toaster } from "react-hot-toast";
 
 const font = Roboto({
     weight: ["100", "300", "400", "500", "700", "900"],
@@ -73,6 +74,26 @@ export default async function RootLayout({
     return (
         <html lang="en">
             <body className={font.className}>
+                <Toaster
+                    position="top-center"
+                    reverseOrder={false}
+                    gutter={8}
+                    containerClassName=""
+                    containerStyle={{}}
+                    toastOptions={{
+                        className: "",
+                        duration: 5000,
+                        success: {
+                            duration: 3000,
+                        },
+                        custom: {
+                            duration: 3000,
+                        },
+                        error: {
+                            duration: 3000,
+                        }
+                    }}
+                />
                 <AuthProvider session={session}>{children}</AuthProvider>
             </body>
         </html>

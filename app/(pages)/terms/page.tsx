@@ -4,7 +4,7 @@ import React from "react";
 
 export default function TermsAndConditions() {
     return (
-        <div className="w-[90%] lg:w-[60%] m-auto text-left text-[18px]">
+        <div className="w-[90%] lg:w-[60%] m-auto text-left lg:text-[18px]">
             <h1 className="lg:text-4xl text-3xl my-4">{TermsConfig.title}</h1>
             <div className="terms-container">
             <p>

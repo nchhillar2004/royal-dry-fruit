@@ -32,7 +32,7 @@ export default function RegisterPage() {
                 }),
             });
             if (res.status === 400) {
-                toast.error("User not found");
+                toast.error("Email already registered");
             }
             if (res.status === 200) {
                 toast.success("Registered successfull");

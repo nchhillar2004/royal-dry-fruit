@@ -45,6 +45,9 @@ export default function Footer() {
                                 <Link href="/terms">Terms</Link>
                             </li>
                             <li>
+                                <Link href="/admin">Admin</Link>
+                            </li>
+                            <li>
                                 <Link href={SiteConfig.location} target="_blank">Locate us</Link>
                             </li>
                         </ul>

@@ -8,28 +8,28 @@ generator client {
 }
 
 model Mails {
-  id             String   @id @default(auto()) @map("_id") @db.ObjectId
-  title          String
-  body           String
-  type           String
-  isGranted      Boolean  @default(false)
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  body        String
+  type        String
+  isGranted   Boolean  @default(false)
   authorEmail String?
-  author         Users?   @relation(fields: [authorId], references: [id])
-  authorId       String?  @db.ObjectId
-  createdAt      DateTime @default(now())
-  time           String
+  author      Users?   @relation(fields: [authorId], references: [id])
+  authorId    String?  @db.ObjectId
+  createdAt   DateTime @default(now())
+  time        String
 }
 
 model Products {
-  id             String   @id @default(auto()) @map("_id") @db.ObjectId
-  title          String
-  body           String
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  body        String
   authorEmail String?
-  author         Users?   @relation(fields: [authorId], references: [id])
-  authorId       String?  @db.ObjectId
-  createdAt      DateTime @default(now())
-  time           String
-  likes          Int?
+  author      Users?   @relation(fields: [authorId], references: [id])
+  authorId    String?  @db.ObjectId
+  createdAt   DateTime @default(now())
+  time        String
+  likes       Int?
 }
 
 model Users {
@@ -45,7 +45,7 @@ model Users {
   image      String
   address    Address?
   product    Products[]
-  mails       Mails[]
+  mails      Mails[]
   time       String
   createdAt  DateTime   @default(now())
 }

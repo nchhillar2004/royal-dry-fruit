@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
 import { time } from "@/utils/getTime";
+import Loading from "@/components/common/loading";
 
 export default function ContactForm() {
     const router = useRouter();
@@ -45,7 +46,7 @@ export default function ContactForm() {
         }
     };
     if (sessionStatus === "loading") {
-        return <div className="loading">loading...</div>;
+        return <Loading/>;
     }
 
     return (

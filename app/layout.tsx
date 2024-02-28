@@ -6,6 +6,8 @@ import "animate.css";
 import AuthProvider from "@/utils/SessionProvider";
 import { getServerSession } from "next-auth";
 import { Toaster } from "react-hot-toast";
+import { Suspense } from "react";
+import Loading from "@/components/common/loading";
 
 const font = Roboto({
     weight: ["100", "300", "400", "500", "700", "900"],
@@ -91,10 +93,12 @@ export default async function RootLayout({
                         },
                         error: {
                             duration: 3000,
-                        }
+                        },
                     }}
                 />
-                <AuthProvider session={session}>{children}</AuthProvider>
+                <Suspense fallback={<Loading />}>
+                    <AuthProvider session={session}>{children}</AuthProvider>
+                </Suspense>
             </body>
         </html>
     );

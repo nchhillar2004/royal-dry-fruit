@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
 import { time } from "@/utils/getTime";
 import Loading from "@/components/common/loading";
+import Link from "next/link";
 
 export default function ContactForm() {
     const router = useRouter();
@@ -23,7 +24,7 @@ export default function ContactForm() {
             const authorId = session.user?.id;
             const authorEmail = session.user?.email;
 
-            const res = await fetch("/api/sendmail", {
+            const res = await fetch("/api/post/mail", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -46,14 +47,14 @@ export default function ContactForm() {
         }
     };
     if (sessionStatus === "loading") {
-        return <Loading/>;
+        return <Loading />;
     }
 
     return (
         <>
             {session ? (
                 <div className="">
-                  <h1 className='lg:text-4xl text-3xl my-4'>Contact form</h1>
+                    <h1 className="lg:text-4xl text-3xl my-4">Contact form</h1>
                     <div className="card w-full">
                         <form onSubmit={handlePost} className="inputfld">
                             <label htmlFor="title">Mail title</label>
@@ -110,7 +111,10 @@ export default function ContactForm() {
                     </div>
                 </div>
             ) : (
-                <div className="main">Login to send mail</div>
+                <div className="main h-full flex flex-col items-center justify-center">
+                    <h1>Login to send mail</h1>
+                    <Link href="/login" className="link">Login</Link>
+                </div>
             )}
         </>
     );

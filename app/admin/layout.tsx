@@ -25,7 +25,7 @@ export default function AdminLayout({
         );
     }
     return (
-        <div>
+        <div className="bg-gray-100">
             <nav className="bg-gray-800 p-4">
                 <div className="container mx-auto flex items-center justify-between">
                     <Link href="/admin">
@@ -46,7 +46,7 @@ export default function AdminLayout({
                     </div>
                 </div>
             </nav>
-            <main className="bg-gray-100 font-sans leading-normal tracking-normal">
+            <main className="font-sans leading-normal tracking-normal min-h-[80vh]">
                 {children}
             </main>
             <footer className="bg-gray-800 text-white p-4 mt-8">

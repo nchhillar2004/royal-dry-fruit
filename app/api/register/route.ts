@@ -6,21 +6,20 @@ import bcrypt from "bcryptjs";
 export const dynamic = "force-dynamic";
 
 export const POST = async (request: Request) => {
-    const { name, email, password, time, image } =
-        await request.json();
-        
+    const { name, email, password, time, image } = await request.json();
+
     await connectDB();
     const existingEmail = await prisma.users.findUnique({
         where: { email: email },
-        select: { email: true }
-    })
+        select: { email: true },
+    });
 
     if (existingEmail) {
         return new NextResponse("Email already registered", { status: 400 });
     }
 
     const hashedPassword = await bcrypt.hash(password, 8);
-    
+
     try {
         const newUser = await prisma.users.create({
             data: {
@@ -34,7 +33,7 @@ export const POST = async (request: Request) => {
         return new NextResponse("User created", { status: 200 });
     } catch (error) {
         console.log(error);
-        
+
         return NextResponse.json(
             { error },
             {

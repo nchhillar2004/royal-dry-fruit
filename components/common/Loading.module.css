@@ -6,7 +6,7 @@
 }
 
 .loadingSpinner {
-    border: 8px solid #ff0000;
+    border: 5px solid #ff0000;
     border-top: 8px solid transparent;
     border-radius: 50%;
     width: 50px;

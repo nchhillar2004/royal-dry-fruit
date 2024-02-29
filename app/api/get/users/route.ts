@@ -8,7 +8,9 @@ export const GET = async () => {
     try {
         await connectDB();
 
-        const users = await prisma.users.findMany();
+        const users = await prisma.users.findMany({
+            include: { mails: true, orders: true, product: true }
+        });
 
         return new NextResponse(JSON.stringify(users), {
             status: 200,

@@ -5,6 +5,9 @@ import React from "react";
 import SiteConfig from "@/config/site";
 import { signOut, useSession } from "next-auth/react";
 import toast from "react-hot-toast";
+import Cart from "./cart";
+import Avatar from "@mui/material/Avatar";
+import { IconButton } from "@mui/material";
 
 export default function Header() {
     const { data: session, status: sessionStatus } = useSession();
@@ -12,12 +15,14 @@ export default function Header() {
     if (sessionStatus === "loading") {
         isLoading = true;
     }
+    let firstChar = session?.user?.name?.charAt(0);
+
     return (
         <header
             className="fixed z-10 top-0 w-full animate__animated animate__fadeInDown bg-red-900"
             id="top"
         >
-            <div className="flex justify-between py-4 text-red-50 items-center w-[96%] lg:w-[96%] m-auto">
+            <div className="flex justify-between py-2 text-red-50 items-center w-[96%] lg:w-[96%] m-auto">
                 <div className="left flex w-fit cursor-pointer space-x-2">
                     <div className="lg:hidden">{/* <MenuSidebar/> */}</div>
                     <Link href="/">
@@ -29,7 +34,7 @@ export default function Header() {
                             className="bg-red-50 rounded-full"
                         />
                     </Link>
-                    <div className="flex flex-col justify-around">
+                    <div className="flex flex-col justify-around max-[350px]:hidden">
                         <p className="leading-none text-xl font-bold">Royal</p>
                         <p className="text-base font-semibold leading-none text-nowrap">
                             Dry Fruit Point
@@ -72,8 +77,15 @@ export default function Header() {
                     ) : (
                         <div className="flex">
                             {session ? (
-                                <div className="profile space-x-2 flex items-center">
-                                    <Image src={`${session?.user?.image}`} height={24} width={24} alt={`${session?.user?.name}`} />
+                                <div className="profile max-md:space-x-1 space-x-2 flex items-center">
+                                    {/* <Image src={`${session?.user?.image}`} height={24} width={24} alt={`${session?.user?.name}`} /> */}
+
+                                    <Avatar
+                                        className="text-red-600 bg-red-50"
+                                        sx={{ width: 30, height: 30 }}
+                                    >
+                                        {firstChar}
+                                    </Avatar>
                                     <p className="max-md:hidden">
                                         {session.user?.name}
                                     </p>
@@ -86,6 +98,7 @@ export default function Header() {
                                     >
                                         Logout
                                     </button>
+                                    <Cart />
                                 </div>
                             ) : (
                                 <Link

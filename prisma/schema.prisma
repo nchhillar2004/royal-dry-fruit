@@ -24,12 +24,29 @@ model Products {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   title       String
   body        String
+  image       Bytes?
+  mrp         Int      @default(0)
+  cost        Int      @default(0)
+  discount    Int      @default(0)
+  tagLine     String?
+  orders      Orders[]
+  brand       String?
   authorEmail String?
   author      Users?   @relation(fields: [authorId], references: [id])
   authorId    String?  @db.ObjectId
   createdAt   DateTime @default(now())
   time        String
-  likes       Int?
+  likes       Int      @default(0)
+}
+
+model Orders {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  Users      Users?    @relation(fields: [usersId], references: [id])
+  usersId    String?   @db.ObjectId
+  Products   Products? @relation(fields: [productsId], references: [id])
+  productsId String?   @db.ObjectId
+  createdAt  DateTime  @default(now())
+  time       String
 }
 
 model Users {
@@ -45,6 +62,7 @@ model Users {
   image      String
   address    Address?
   product    Products[]
+  orders     Orders[]
   mails      Mails[]
   time       String
   createdAt  DateTime   @default(now())

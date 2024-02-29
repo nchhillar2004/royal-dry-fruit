@@ -1,6 +1,7 @@
 import { connectDB } from "@/helpers/conn";
 import { NextResponse } from "next/server";
 import prisma from "@/prisma";
+import { createLogs } from "@/data/logs";
 
 export const dynamic = "force-dynamic";
 
@@ -11,6 +12,15 @@ export const GET = async () => {
         const orders = await prisma.orders.findMany({
             include: { Users: true, Products: true },
         });
+        const logData = {
+            userId: "",
+            logType: "Success",
+            message: "Orders fetched",
+            errorCode: 200,
+            endpoint: "/api/get/orders",
+            responseBody: "Orders",
+        };
+        createLogs(logData);
 
         return new NextResponse(JSON.stringify(orders), {
             status: 200,

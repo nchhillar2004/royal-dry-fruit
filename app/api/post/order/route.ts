@@ -1,6 +1,7 @@
 import prisma from "@/prisma/index";
 import { NextResponse } from "next/server";
 import { connectDB } from "@/helpers/conn";
+import { createLogs } from "@/data/logs";
 
 export const POST = async (request: Request) => {
     const { userId, productId, time } = await request.json();
@@ -42,7 +43,7 @@ export const POST = async (request: Request) => {
             try {
                 await prisma.products.update({
                     where: { id: product.id },
-                    data: { orders: { connect: { id: newOrder.id } } },
+                    data: { orders: { connect: { id: newOrder.id }} },
                 });
             } catch (error) {
                 console.log("UNABLE TO UPDATE Products orders");
@@ -51,6 +52,15 @@ export const POST = async (request: Request) => {
         if (!product) {
             return new NextResponse("Product not found", { status: 404 });
         }
+        const logData = {
+            userId: user.id,
+            logType: "Success",
+            message: "Order placed succesfully",
+            errorCode: 200,
+            endpoint: "/api/post/order",
+            responseBody: "Added to cart",
+        };
+        createLogs(logData);
         return NextResponse.json({ newOrder }, { status: 200 });
     } catch (err: any) {
         console.log("chle" + err);

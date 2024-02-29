@@ -50,22 +50,23 @@ model Orders {
 }
 
 model Users {
-  id         String     @id @default(auto()) @map("_id") @db.ObjectId
+  id         String        @id @default(auto()) @map("_id") @db.ObjectId
   name       String?
-  email      String     @unique
+  email      String        @unique
   password   String?
-  role       Role       @default(USER)
-  plan       Plan       @default(FREE)
-  isAdmin    Boolean    @default(false)
-  isVerified Boolean    @default(false)
-  isBan      Boolean    @default(false)
+  role       Role          @default(USER)
+  plan       Plan          @default(FREE)
+  isAdmin    Boolean       @default(false)
+  isVerified Boolean       @default(false)
+  isBan      Boolean       @default(false)
   image      String
   address    Address?
   product    Products[]
   orders     Orders[]
   mails      Mails[]
+  logs       WebsiteLogs[]
   time       String
-  createdAt  DateTime   @default(now())
+  createdAt  DateTime      @default(now())
 }
 
 type Address {
@@ -83,4 +84,20 @@ enum Role {
 enum Plan {
   FREE
   PRO
+}
+
+model WebsiteLogs {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  timestamp    DateTime @default(now())
+  logType      String
+  message      String
+  ipAddress    String?
+  userAgent    String?
+  errorCode    Int?
+  endpoint     String?
+  requestBody  String?
+  responseBody String?
+  duration     Float?
+  Users        Users?   @relation(fields: [usersId], references: [id])
+  usersId      String?  @db.ObjectId
 }

@@ -35,7 +35,7 @@ export default function RegisterPage() {
                 toast.error("Email already registered");
             }
             if (res.status === 200) {
-                toast.success("Registered successfull");
+                toast.success("Registered successfully");
                 router.push("/login");
             }
         } catch (error) {}

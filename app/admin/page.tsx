@@ -11,6 +11,7 @@ import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
 import PaidRoundedIcon from "@mui/icons-material/PaidRounded";
 import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
 import MailRoundedIcon from "@mui/icons-material/MailRounded";
+import WebsiteLogs from "@/components/admin/WebsiteLogs";
 
 export default async function AdminDashboard() {
     const users = await getUsers();
@@ -93,7 +94,9 @@ export default async function AdminDashboard() {
                         </div>
                     </Link>
                 </div>
-                <DynamicUserChart />
+                {/* <DynamicUserChart /> */}
+                <hr />
+                <WebsiteLogs/>
             </div>
         </div>
     );

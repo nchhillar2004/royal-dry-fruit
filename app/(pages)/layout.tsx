@@ -9,7 +9,7 @@ export default function PagesLayout({
     return (
         <div>
             <Header />
-            <main className="min-h-[50vh] pt-[51px] h-[60vh] w-[96%] m-auto pb-10">
+            <main className="min-h-[50vh] pt-[51px] h-fit w-[96%] m-auto pb-10">
                 {children}
             </main>
             <Footer />

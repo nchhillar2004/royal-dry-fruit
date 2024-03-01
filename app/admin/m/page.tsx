@@ -4,6 +4,9 @@ import SiteConfig from "@/config/site";
 import { IconButton } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 import toast from "react-hot-toast";
+import { useSession } from "next-auth/react";
+import { createLogs } from "@/data/logs";
+import { AnyBulkWriteOperation } from "mongodb";
 
 interface Mail {
     id: String;
@@ -17,19 +20,33 @@ interface Mail {
 }
 
 const Mails: React.FC = () => {
+    const { data: session }: any = useSession();
     const [Mails, setMails] = useState<Mail[]>([]);
     const [searchQuery, setSearchQuery] = useState<string>("");
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`${SiteConfig.url}/api/get/mails`, {
-                    cache: "no-store",
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                });
-
+                const response = await fetch(
+                    `${SiteConfig.url}/api/get/mails`,
+                    {
+                        cache: "no-store",
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    }
+                );
+                console.log(response);
+                
+                const logData = {
+                    userId: session?.user?.id,
+                    logType: "Success",
+                    message: "Mails fetched",
+                    errorCode: response.status,
+                    endpoint: "/api/get/mails",
+                    responseBody: response.statusText,
+                };
+                createLogs(logData);
                 const data = await response.json();
                 setMails(data);
             } catch (error) {
@@ -49,7 +66,7 @@ const Mails: React.FC = () => {
                 },
                 body: JSON.stringify({ id }),
             });
-            
+
             if (response.ok) {
                 toast.success("Mail deleted");
             } else {
@@ -118,8 +135,10 @@ const Mails: React.FC = () => {
                                     )}
                                 </td>
                                 <td className="py-1 px-2 border">
-                                    <IconButton onClick={() => deleteMail(Mail.id)}>
-                                        <Delete/>
+                                    <IconButton
+                                        onClick={() => deleteMail(Mail.id)}
+                                    >
+                                        <Delete />
                                     </IconButton>
                                 </td>
                             </tr>

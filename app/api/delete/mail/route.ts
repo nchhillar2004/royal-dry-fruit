@@ -20,15 +20,6 @@ export const POST = async (request: Request) => {
         }
 
         await prisma.mails.delete({ where: { id: id } });
-        const logData = {
-            userId: mail.id,
-            logType: "Success",
-            message: "Mail deleted",
-            errorCode: 200,
-            endpoint: "/api/delete/mail",
-            responseBody: mail.title,
-        };
-        createLogs(logData);
         return new NextResponse("Mail deleted successfully", { status: 200 });
     } catch (error: any) {
         console.error("Error:", error);

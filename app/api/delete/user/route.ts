@@ -1,7 +1,6 @@
 import { connectDB } from "@/helpers/conn";
 import { NextResponse } from "next/server";
 import prisma from "@/prisma";
-import { createLogs } from "@/data/logs";
 
 export const dynamic = "force-dynamic";
 

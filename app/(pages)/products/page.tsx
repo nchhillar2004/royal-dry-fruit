@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import SiteConfig from "@/config/site";
 import { time } from "@/utils/getTime";
 import { useSession } from "next-auth/react";
+import { createLogs } from "@/data/logs";
 
 interface Product {
     id: String;
@@ -38,7 +39,15 @@ export default function ProductsPage() {
                         },
                     }
                 );
-
+                const logData = {
+                    userId: session?.user?.id,
+                    logType: "Success",
+                    message: "Products fetched",
+                    errorCode: response.status,
+                    endpoint: "/api/get/products",
+                    responseBody: response.statusText,
+                };
+                createLogs(logData);
                 const data = await response.json();
                 setProducts(data);
             } catch (error) {
@@ -82,25 +91,29 @@ export default function ProductsPage() {
                 </div>
             </div>
             <div className="products">
-                <ul className="p-0 list-none">
-                {Products.map((Product) => (
-                    <li key={Product._id}>
-                        <div className="card">
-                            <p>{Product.title}</p>
-                            <p>Description - {Product.body}</p>
-                            <time>Added on: {Product.time}</time>
-                            <p>Added by: {Product.authorEmail}</p>
-                            <button
-                                onClick={() => {handleOrder(
-                                    Product._id,
-                                    session?.user?._id
-                                )}}
-                            >
-                                Add to cart
-                            </button>
-                        </div>
-                    </li>
-                ))}</ul>
+                <ul className="card list-none">
+                    {Products.map((Product) => (
+                        <li key={Product._id}>
+                            <div className="rounded-md hover:bg-gray-100">
+                                <h2>{Product.title}</h2>
+                                <p>Description - {Product.body}</p>
+                                <time className="text-[12px]">Added on: {Product.time}</time>
+                                <p className="text-[12px]">Added by: {Product.authorEmail}</p>
+                                <button
+                                className="nav-button"
+                                    onClick={() => {
+                                        handleOrder(
+                                            Product._id,
+                                            session?.user?._id
+                                        );
+                                    }}
+                                >
+                                    Add to cart
+                                </button>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
             </div>
         </div>
     );

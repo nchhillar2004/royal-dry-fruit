@@ -20,15 +20,6 @@ export const POST = async (request: Request) => {
         }
 
         await prisma.products.delete({ where: { id: id } });
-        const logData = {
-            userId: product.id,
-            logType: "Success",
-            message: "Product deleted",
-            errorCode: 200,
-            endpoint: "/api/delete/product",
-            responseBody: product.title,
-        };
-        createLogs(logData);
         return new NextResponse("Product deleted successfully", {
             status: 200,
         });

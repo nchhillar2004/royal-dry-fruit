@@ -17,6 +17,25 @@ export const POST = async (request: Request) => {
             where: { id: productId },
             select: { id: true, title: true, cost: true },
         });
+        const prodExists = await prisma.users.findUnique({
+            where: { id: userId, product: productId },
+            select: { id: true, product: true },
+        });
+
+        if (prodExists) {
+            const logData = {
+                userId: userId,
+                logType: "Conflict",
+                message: "Order already in cart",
+                errorCode: 409,
+                endpoint: "/api/post/order",
+                responseBody: "Conflict in resources",
+            };
+            createLogs(logData);
+            return new NextResponse("Product already in cart", {
+                status: 409,
+            });
+        }
 
         const newOrder = await prisma.orders.create({
             data: {
@@ -43,7 +62,7 @@ export const POST = async (request: Request) => {
             try {
                 await prisma.products.update({
                     where: { id: product.id },
-                    data: { orders: { connect: { id: newOrder.id }} },
+                    data: { orders: { connect: { id: newOrder.id } } },
                 });
             } catch (error) {
                 console.log("UNABLE TO UPDATE Products orders");

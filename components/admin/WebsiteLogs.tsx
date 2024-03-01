@@ -14,9 +14,9 @@ export default async function WebsiteLogs() {
         <section>
             <div className="logs">
                 <code className="text-black text-2xl font-semibold mb-4">Website Logs</code>
-                <ul className="font-mono flex flex-col-reverse space-y-2 font-bold">
+                <ul className="font-mono flex flex-col-reverse font-semibold text-[12px]">
                     {logs.map((log: any) => (
-                        <li key={log.id} className="flex py-2 bg-gray-900 px-4">
+                        <li key={log.id} className="flex py-2 bg-gray-900 px-4 flex-wrap">
                             <p className="text-yellow-600">{log.timestamp}</p>
                             <p className="text-purple-600">{log.endpoint}</p>
                             <p className="text-green-600">{log.logType}</p>

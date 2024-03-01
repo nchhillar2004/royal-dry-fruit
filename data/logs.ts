@@ -27,6 +27,5 @@ export const createLogs = async (logData: LogData): Promise<any> => {
         return await response.json();
     } catch (error) {
         console.error('Error adding log data:', error);
-        throw new Error('Failed to add log data');
     }
 };

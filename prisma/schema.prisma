@@ -41,10 +41,10 @@ model Products {
 
 model Orders {
   id         String    @id @default(auto()) @map("_id") @db.ObjectId
-  Users      Users?    @relation(fields: [usersId], references: [id])
-  usersId    String?   @db.ObjectId
-  Products   Products? @relation(fields: [productsId], references: [id])
-  productsId String?   @db.ObjectId
+  Users      Users    @relation(fields: [usersId], references: [id])
+  usersId    String   @db.ObjectId
+  Products   Products @relation(fields: [productsId], references: [id])
+  productsId String   @db.ObjectId
   createdAt  DateTime  @default(now())
   time       String
 }

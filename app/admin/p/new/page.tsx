@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
 import { time } from "@/utils/getTime";
 import Loading from "@/components/common/loading";
+import { createLogs } from "@/data/logs";
 
 export default function AddProduct() {
     const router = useRouter();
@@ -47,6 +48,15 @@ export default function AddProduct() {
                     time,
                 }),
             });
+            const logData = {
+                userId: session?.user?.id,
+                logType: "Info",
+                message: "Mails fetched",
+                errorCode: res.status,
+                endpoint: "/api/post/product",
+                responseBody: res.statusText,
+            };
+            createLogs(logData);
             if (res.status === 200) {
                 toast.success("Product added successfully");
                 router.push("/admin/p");

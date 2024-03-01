@@ -16,7 +16,7 @@ export const POST = async (request: Request) => {
     });
 
     if (existingEmail) {
-        return new NextResponse("Email already registered", { status: 400 });
+        return new NextResponse("Email already registered", { status: 409 });
     }
 
     const hashedPassword = await bcrypt.hash(password, 8);

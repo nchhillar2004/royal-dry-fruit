@@ -5,6 +5,8 @@ import { Button, IconButton } from "@mui/material";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { Delete } from "@mui/icons-material";
+import { createLogs } from "@/data/logs";
+import { useSession } from "next-auth/react";
 
 interface Product {
     id: String;
@@ -23,6 +25,7 @@ interface Product {
 }
 
 const Products: React.FC = () => {
+    const { data: session }: any = useSession();
     const router = useRouter();
     const [Products, setProducts] = useState<Product[]>([]);
     const [searchQuery, setSearchQuery] = useState<string>("");
@@ -39,7 +42,15 @@ const Products: React.FC = () => {
                         },
                     }
                 );
-
+                const logData = {
+                    userId: session?.user?.id,
+                    logType: "Success",
+                    message: "Products fetched",
+                    errorCode: response.status,
+                    endpoint: "/api/get/products",
+                    responseBody: response.statusText,
+                };
+                createLogs(logData);
                 const data = await response.json();
                 setProducts(data);
             } catch (error) {

@@ -1,7 +1,6 @@
 import prisma from "@/prisma/index";
 import { NextResponse } from "next/server";
 import { connectDB } from "@/helpers/conn";
-import { createLogs } from "@/data/logs";
 
 export const POST = async (request: Request) => {
     const { userId, productId, time } = await request.json();
@@ -23,15 +22,6 @@ export const POST = async (request: Request) => {
         });
 
         if (prodExists) {
-            const logData = {
-                userId: userId,
-                logType: "Conflict",
-                message: "Order already in cart",
-                errorCode: 409,
-                endpoint: "/api/post/order",
-                responseBody: "Conflict in resources",
-            };
-            createLogs(logData);
             return new NextResponse("Product already in cart", {
                 status: 409,
             });
@@ -71,19 +61,8 @@ export const POST = async (request: Request) => {
         if (!product) {
             return new NextResponse("Product not found", { status: 404 });
         }
-        const logData = {
-            userId: user.id,
-            logType: "Success",
-            message: "Order placed succesfully",
-            errorCode: 200,
-            endpoint: "/api/post/order",
-            responseBody: "Added to cart",
-        };
-        createLogs(logData);
         return NextResponse.json({ newOrder }, { status: 200 });
     } catch (err: any) {
-        console.log("chle" + err);
-
         return new NextResponse("error yaha h ", {
             status: 500,
         });

@@ -7,7 +7,6 @@ import { signOut, useSession } from "next-auth/react";
 import toast from "react-hot-toast";
 import Cart from "./cart";
 import Avatar from "@mui/material/Avatar";
-import { IconButton } from "@mui/material";
 
 export default function Header() {
     const { data: session, status: sessionStatus } = useSession();

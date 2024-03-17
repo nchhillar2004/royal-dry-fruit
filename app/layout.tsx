@@ -7,7 +7,7 @@ import AuthProvider from "@/utils/SessionProvider";
 import { getServerSession } from "next-auth";
 import { Toaster } from "react-hot-toast";
 import { Suspense } from "react";
-import Loading from "@/components/common/loading";
+import Loading from "@/components/common/Loading";
 
 const font = Roboto({
     weight: ["100", "300", "400", "500", "700", "900"],

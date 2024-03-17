@@ -3,7 +3,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import prisma from "@/prisma/index";
 import { connectDB } from "@/helpers/conn";
-import { createLogs } from "@/data/logs";
 
 export const dynamic = "force-dynamic";
 
@@ -41,15 +40,6 @@ const authOptions = {
                     if (!isPasswordCorrect) {
                         throw new Error("Password incorrect");
                     }
-                    const logData = {
-                        userId: user.id,
-                        logType: "Success",
-                        message: "User logged in",
-                        errorCode: 200,
-                        endpoint: "/api/[...nextauth]",
-                        responseBody: "User Login",
-                    };
-                    createLogs(logData);
                     return user;
                 }
             },

@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import SiteConfig from "@/config/site";
 import { time } from "@/utils/getTime";
 import { useSession } from "next-auth/react";
-import { createLogs } from "@/data/logs";
 
 interface Product {
     id: String;
@@ -39,15 +38,6 @@ export default function ProductsPage() {
                         },
                     }
                 );
-                const logData = {
-                    userId: session?.user?.id,
-                    logType: "Success",
-                    message: "Products fetched",
-                    errorCode: response.status,
-                    endpoint: "/api/get/products",
-                    responseBody: response.statusText,
-                };
-                createLogs(logData);
                 const data = await response.json();
                 setProducts(data);
             } catch (error) {

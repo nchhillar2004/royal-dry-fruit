@@ -1,7 +1,7 @@
 "use client";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import Loading from "@/components/common/loading";
+import Loading from "@/components/common/Loading";
 
 export default function AdminLayout({
     children,

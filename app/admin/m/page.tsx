@@ -5,7 +5,6 @@ import { IconButton } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 import toast from "react-hot-toast";
 import { useSession } from "next-auth/react";
-import { createLogs } from "@/data/logs";
 import { AnyBulkWriteOperation } from "mongodb";
 
 interface Mail {
@@ -36,17 +35,6 @@ const Mails: React.FC = () => {
                         },
                     }
                 );
-                console.log(response);
-                
-                const logData = {
-                    userId: session?.user?.id,
-                    logType: "Success",
-                    message: "Mails fetched",
-                    errorCode: response.status,
-                    endpoint: "/api/get/mails",
-                    responseBody: response.statusText,
-                };
-                createLogs(logData);
                 const data = await response.json();
                 setMails(data);
             } catch (error) {

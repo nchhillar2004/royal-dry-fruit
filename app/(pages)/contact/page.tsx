@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
 import { time } from "@/utils/getTime";
-import Loading from "@/components/common/loading";
+import Loading from "@/components/common/Loading";
 import Link from "next/link";
 
 export default function ContactForm() {

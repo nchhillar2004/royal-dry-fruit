@@ -64,7 +64,6 @@ model Users {
   product    Products[]
   orders     Orders[]
   mails      Mails[]
-  logs       WebsiteLogs[]
   time       String
   createdAt  DateTime      @default(now())
 }
@@ -84,20 +83,4 @@ enum Role {
 enum Plan {
   FREE
   PRO
-}
-
-model WebsiteLogs {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  timestamp    DateTime @default(now())
-  logType      String
-  message      String
-  ipAddress    String?
-  userAgent    String?
-  errorCode    Int?
-  endpoint     String?
-  requestBody  String?
-  responseBody String?
-  duration     Float?
-  Users        Users?   @relation(fields: [usersId], references: [id])
-  usersId      String?  @db.ObjectId
 }

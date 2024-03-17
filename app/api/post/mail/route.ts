@@ -1,7 +1,6 @@
 import prisma from "@/prisma/index";
 import { NextResponse } from "next/server";
 import { connectDB } from "@/helpers/conn";
-import { createLogs } from "@/data/logs";
 
 export const POST = async (request: Request) => {
     const { title, body, authorEmail, authorId, type, time } =
@@ -39,19 +38,8 @@ export const POST = async (request: Request) => {
         if (!user) {
             return new NextResponse("User not found", { status: 404 });
         }
-        const logData = {
-            userId: user.id,
-            logType: "Success",
-            message: "Mail sent successfully",
-            errorCode: 200,
-            endpoint: "/api/post/mail",
-            responseBody: title,
-        };
-        createLogs(logData);
         return NextResponse.json({ newMail }, { status: 200 });
     } catch (err: any) {
-        console.log("chle" + err);
-
         return new NextResponse("error yaha h " + err, {
             status: 500,
         });

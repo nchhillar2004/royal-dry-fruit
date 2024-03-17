@@ -1,7 +1,6 @@
 import { connectDB } from "@/helpers/conn";
 import { NextResponse } from "next/server";
 import prisma from "@/prisma";
-import { createLogs } from "@/data/logs";
 
 export const dynamic = "force-dynamic";
 
@@ -24,16 +23,6 @@ export const POST = async (request: Request) => {
             status: 200,
         });
     } catch (error: any) {
-        console.error("Error:", error);
-        const logData = {
-            userId: error.id,
-            logType: "Error",
-            message: "Product NOT deleted",
-            errorCode: 500,
-            endpoint: "/api/delete/product",
-            responseBody: error,
-        };
-        createLogs(logData);
         return new NextResponse(`Internal Server Error: ${error}`, {
             status: 500,
         });

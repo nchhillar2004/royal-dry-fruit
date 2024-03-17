@@ -1,17 +1,12 @@
 import React, { Key } from "react";
-import DynamicUserChart from "@/components/admin/DynamicUserChart";
 import { getUsers } from "@/data/users";
 import { getMails } from "@/data/mails";
 import { getProducts } from "@/data/products";
 import Link from "next/link";
-import TrendingUpRoundedIcon from "@mui/icons-material/TrendingUpRounded";
-import TrendingDownRoundedIcon from "@mui/icons-material/TrendingDownRounded";
-import { IconButton } from "@mui/material";
 import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
 import PaidRoundedIcon from "@mui/icons-material/PaidRounded";
 import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
 import MailRoundedIcon from "@mui/icons-material/MailRounded";
-import WebsiteLogs from "@/components/admin/WebsiteLogs";
 
 export default async function AdminDashboard() {
     const users = await getUsers();
@@ -94,9 +89,6 @@ export default async function AdminDashboard() {
                         </div>
                     </Link>
                 </div>
-                {/* <DynamicUserChart /> */}
-                <hr />
-                <WebsiteLogs/>
             </div>
         </div>
     );
